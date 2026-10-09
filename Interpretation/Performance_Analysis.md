@@ -41,3 +41,39 @@ The graphs should be interpreted using the measurements recorded in `Output/resu
 ## 7. Conclusion
 
 The project compares sequential and OpenMP implementations of a recommendation network. Execution time, speedup, and efficiency help evaluate the benefits and limitations of parallel execution.
+
+## 8. Benchmarking Methodology
+
+The sequential and OpenMP implementations are tested using the same MovieLens dataset and corresponding user and movie limits. The `run_benchmark.py` script runs the programs with selected thread counts and records execution times. Repeated runs help reduce the effect of timing fluctuations. The input configuration should remain consistent for a fair comparison.
+
+## 9. Execution Time Analysis
+
+Execution time measures how long each implementation takes to complete its computation. The results should be collected from the project's benchmark output files. System load, CPU scheduling, compiler settings, and workload size may affect the measurements. Therefore, repeated measurements should be used wherever possible.
+
+## 10. Speedup Analysis
+
+Speedup indicates the performance improvement of the parallel implementation compared with the sequential implementation.
+
+$$
+\text{Speedup}=\frac{T_{\text{seq}}}{T_{\text{parallel}}}
+$$
+
+A speedup greater than 1 indicates that the parallel implementation is faster for the tested configuration. A value near 1 indicates little improvement, while a value below 1 indicates slower parallel execution.
+
+## 11. Parallel Efficiency Analysis
+
+Parallel efficiency measures how effectively the OpenMP threads contribute to performance.
+
+$$
+\text{Efficiency}=\frac{\text{Speedup}}{p}\times100\%
+$$
+
+Here, \(p\) represents the number of threads used. Efficiency may decrease as the thread count increases due to synchronization overhead, scheduling costs, serial operations, and limited CPU resources.
+
+## 12. Scalability Analysis
+
+Scalability describes how performance changes as the workload increases. By varying the number of users and movies, the execution times of the sequential and parallel implementations can be compared across different input sizes. Larger workloads may benefit more from parallelization, but conclusions must be based on actual benchmark measurements.
+
+## 13. Experimental Limitations
+
+The results depend on the hardware, compiler, runtime environment, dataset, input limits, and thread count. Small workloads may produce unstable timing measurements, and increasing the number of threads does not guarantee faster execution. Performance conclusions should therefore be based on measured results rather than assumptions.
