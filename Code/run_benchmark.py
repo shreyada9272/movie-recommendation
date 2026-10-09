@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 """
 Runs the full experiment grid and VERIFIES that sequential and OpenMP outputs are identical.

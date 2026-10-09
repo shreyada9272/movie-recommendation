@@ -1,3 +1,9 @@
+# Reads benchmark results and generates graphs to compare the
+# performance of the sequential and OpenMP parallel implementations.
+
+# The plots help analyze execution time, speedup, parallel efficiency,
+# and scalability as the workload or thread count changes.
+
 #!/usr/bin/env python3
 
 import pandas as pd

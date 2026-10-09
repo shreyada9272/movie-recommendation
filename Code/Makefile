@@ -1,3 +1,7 @@
+# Makefile
+# Builds the sequential and OpenMP parallel movie recommendation programs.
+# Use `make` to compile the programs and `make clean` to remove build files.
+
 CC     = gcc
 # -ffp-contract=off : forbid fused multiply-add so sequential and parallel
 #                     builds do identical floating point arithmetic.

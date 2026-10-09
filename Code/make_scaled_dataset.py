@@ -1,3 +1,11 @@
+##
+# # Creates scaled versions of a ratings dataset for scalability
+# experiments.
+
+# The generated datasets help evaluate how execution time changes
+# as the number of users and items increases.
+##
+
 #!/usr/bin/env python3
 """
 Create a LARGER dataset from MovieLens 1M by replicating the users K times.

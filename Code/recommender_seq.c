@@ -22,6 +22,13 @@ int main(int argc, char **argv)
     double t_load = wtime() - t0;
     const int U = d.num_users, I = d.num_items;
 
+    /*
+ * Allocate memory for the recommendation computation:
+ * sim stores the similarity score for every pair of movies.
+ * ri stores the recommended movie IDs for each user.
+ * rs stores the predicted scores for those recommendations.
+ * seen marks movies already rated by the current user.
+ */
     float *sim = malloc((size_t)I * I * sizeof(float));
     int   *ri  = malloc((size_t)U * TOP_N * sizeof(int));
     float *rs  = malloc((size_t)U * TOP_N * sizeof(float));
@@ -39,6 +46,10 @@ int main(int argc, char **argv)
     }
     double t2 = wtime();
 
+    /*
+ * Generate the top-N recommendations for each user.
+ * Users are processed one after another in this sequential version.
+ */
     /* ---------- PHASE 2: top-N recommendations for every user ---------- */
     for (int u = 0; u < U; u++)
         recommend_one_user(&d, sim, u, seen, ri + (size_t)u * TOP_N, rs + (size_t)u * TOP_N);

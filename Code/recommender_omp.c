@@ -35,6 +35,14 @@ int main(int argc, char **argv)
 
     /* ---------- PHASE 1: item-item similarity matrix ---------- */
     /* Row a has (I-a-1) pairs -> uneven work -> schedule(dynamic).  */
+
+    /*
+
+* Allocate memory for movie similarity scores and recommendation results.
+* This parallel implementation uses OpenMP to speed up computation
+* across multiple threads.
+  */
+
     double t1 = wtime();
     #pragma omp parallel for schedule(dynamic, 4)
     for (int a = 0; a < I; a++) {

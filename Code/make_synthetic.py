@@ -1,3 +1,9 @@
+# Generates a synthetic ratings dataset for testing the movie
+# recommendation system without relying only on the original dataset.
+
+# Synthetic data helps evaluate how the programs perform as the
+# number of users and items increases.
+
 #!/usr/bin/env python3
 """
 Generates a FAKE file in MovieLens-1M format (for testing the code when the real
