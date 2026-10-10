@@ -26,26 +26,31 @@ if a.threads is None:
     if a.threads[-1] != cores: a.threads.append(cores)
 print("threads:", a.threads)
 
+
 def run(cmd):
     p = subprocess.run(cmd, capture_output=True, text=True)
-    if p.returncode != 0: sys.exit(p.stderr)
+    if p.returncode != 0:
+        print("Command failed:", cmd, "\nSTDOUT:", p.stdout, "\nSTDERR:", p.stderr)
+        sys.exit(p.returncode)
     line = [l for l in p.stdout.splitlines() if l.startswith("RESULT")][0].split(",")
     return dict(version=line[1], users=int(line[2]), items=int(line[3]), ratings=int(line[4]),
                 threads=int(line[5]), load=float(line[6]), sim=float(line[7]),
                 rec=float(line[8]), total=float(line[9]), checksum=line[10])
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
 tmp = tempfile.mkdtemp()
 rows, all_ok = [], True
 for U in a.users:
     for I in a.items:
         for rep in range(a.reps):
             ref = os.path.join(tmp, "seq.txt")
-            s = run(["./recommender_seq", a.data, str(U), str(I), ref]); s["rep"] = rep; s["match"] = "ref"
+            s = run(["./recommender_seq.exe", a.data, str(U), str(I), ref]); s["rep"] = rep; s["match"] = "ref"
             rows.append(s)
             line = f"U={U:5d} I={I:5d} rep={rep} seq={s['total']:8.3f}s |"
             for T in a.threads:
                 o_path = os.path.join(tmp, f"omp{T}.txt")
-                o = run(["./recommender_omp", a.data, str(U), str(I), str(T), o_path]); o["rep"] = rep
+                o = run(["./recommender_omp.exe", a.data, str(U), str(I), str(T), o_path]); o["rep"] = rep
                 same = filecmp.cmp(ref, o_path, shallow=False) and o["checksum"] == s["checksum"]
                 o["match"] = "YES" if same else "NO"; all_ok &= same
                 rows.append(o)

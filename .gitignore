@@ -1,1 +1,10 @@
 *.exe
+# Temporary test logs
+Code/InstallationLog.txt
+Code/compile_error.txt
+Output/omp.txt
+Output/omp_recommendations.txt
+Output/omp_test.txt
+Output/recommendations.txt
+Output/seq.txt
+Output/test_results.csv

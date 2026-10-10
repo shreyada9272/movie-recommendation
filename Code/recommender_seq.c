@@ -5,16 +5,44 @@
  */
 #include "common.h"
 
+
 int main(int argc, char **argv)
 {
     if (argc < 4) {
-        fprintf(stderr, "Usage: %s ratings.dat MAX_USERS MAX_ITEMS [output_file]\n", argv[0]);
-        return 1;
+        printf("\n====================================\n");
+        printf("   MOVIE RECOMMENDATION SYSTEM\n");
+        printf("====================================\n");
+        printf("This program recommends movies based on\n");
+        printf("similarity between movies users have rated.\n\n");
+
+        printf("Usage:\n");
+        printf("  %s ratings.dat MAX_USERS MAX_ITEMS [output_file]\n\n", argv[0]);
+
+        printf("Input explanations:\n");
+        printf("  ratings.dat  : MovieLens ratings dataset\n");
+        printf("  MAX_USERS    : Maximum number of users to process\n");
+        printf("  MAX_ITEMS    : Maximum number of movies to process\n");
+        printf("  output_file  : Optional file to save recommendations\n\n");
+
+        printf("MovieLens 1M contains up to 6040 users and 3952 movies.\n");
+        printf("Use smaller limits to test performance at different sizes.\n");
+        printf("Example:\n");
+        printf("  %s ../Data/ratings.dat 1000 500 ../Output/recommendations.txt\n\n",
+               argv[0]);
+        return 0;
     }
+
     const char *path = argv[1];
     int max_users = atoi(argv[2]);
     int max_items = atoi(argv[3]);
     const char *out = argc > 4 ? argv[4] : NULL;
+
+    printf("\n--- Movie Recommendation Configuration ---\n");
+    printf("Dataset       : %s\n", path);
+    printf("Maximum users : %d\n", max_users);
+    printf("Maximum movies: %d\n", max_items);
+    printf("Output file   : %s\n", out ? out : "Not requested");
+    printf("------------------------------------------\n\n");
 
     /* ---------- load (not part of the measured compute time) ---------- */
     double t0 = wtime();

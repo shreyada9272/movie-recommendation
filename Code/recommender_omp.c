@@ -13,11 +13,37 @@
 
 int main(int argc, char **argv)
 {
-    if (argc < 5) {
-        fprintf(stderr, "Usage: %s ratings.dat MAX_USERS MAX_ITEMS THREADS [output_file]\n", argv[0]);
-        return 1;
-    }
-    const char *path = argv[1];
+if (argc < 5) {
+    printf("\n====================================\n");
+    printf("   MOVIE RECOMMENDATION SYSTEM\n");
+    printf("   OPENMP PARALLEL VERSION\n");
+    printf("====================================\n");
+    printf("This program recommends movies using\n");
+    printf("parallel computation with OpenMP.\n\n");
+
+    printf("Usage:\n");
+    printf("  %s ratings.dat MAX_USERS MAX_ITEMS THREADS [output_file]\n\n", argv[0]);
+
+    printf("Input explanations:\n");
+    printf("  ratings.dat : MovieLens ratings dataset\n");
+    printf("  MAX_USERS   : Maximum number of users to process\n");
+    printf("  MAX_ITEMS   : Maximum number of movies to process\n");
+    printf("  THREADS     : Number of parallel worker threads\n");
+    printf("  output_file : Optional file to save recommendations\n\n");
+
+    printf("MovieLens 1M contains up to 6040 users and 3952 movies.\n");
+    printf("Use smaller limits to test performance at different sizes.\n");
+    printf("THREADS controls how many workers run in parallel.\n\n");
+
+    printf("Example:\n");
+    printf("  %s ../Data/ratings.dat 1000 500 4 ../Output/recommendations.txt\n\n",
+           argv[0]);
+    return 0;
+}
+
+const char *path = argv[1];
+
+
     int max_users = atoi(argv[2]);
     int max_items = atoi(argv[3]);
     int threads   = atoi(argv[4]);
